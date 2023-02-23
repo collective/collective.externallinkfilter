@@ -31,33 +31,17 @@
 collective.externallinkfilter
 =============================
 
-An add-on for Plone
+This addon overrides Plone's default `resolve_uid_and_caption` filter, to not to try to transform external links
+entered through TinyMCE.
 
-Features
---------
-
-- Can be bullet points
-
-
-Examples
---------
-
-This add-on can be seen in action at the following sites:
-- Is there a page on the internet where everybody can see the features?
+This product is a workaround of the following bug: https://github.com/plone/mockup/issues/1116
 
 
 Documentation
 -------------
 
-Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
+Full documentation for end users can be found in the "docs" folder.
 
-
-Translations
-------------
-
-This product has been translated into
-
-- Klingon (thanks, K'Plai)
 
 
 Installation
@@ -75,19 +59,16 @@ Install collective.externallinkfilter by adding it to your buildout::
 
 and then running ``bin/buildout``
 
+This product will be enabled when you restart the instance. There is no need to install any profile.
+
+To uninstall this product just remove it from your buildout file and run buildout.
+
 
 Authors
 -------
 
-Provided by awesome people ;)
+Mikel Larreategi
 
-
-Contributors
-------------
-
-Put your name here, you deserve it!
-
-- ?
 
 
 Contribute
@@ -96,13 +77,6 @@ Contribute
 - Issue Tracker: https://github.com/collective/collective.externallinkfilter/issues
 - Source Code: https://github.com/collective/collective.externallinkfilter
 - Documentation: https://docs.plone.org/foo/bar
-
-
-Support
--------
-
-If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
 
 
 License
