@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
-from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import (
-    applyProfile,
     FunctionalTesting,
     IntegrationTesting,
-    PLONE_FIXTURE
+    PLONE_FIXTURE,
     PloneSandboxLayer,
 )
-from plone.testing import z2
-
+from plone.app.testing import login
 import collective.externallinkfilter
+from plone.app.testing import SITE_OWNER_NAME
+from plone.app.testing import SITE_OWNER_PASSWORD
 
 
 class CollectiveExternallinkfilterLayer(PloneSandboxLayer):
@@ -21,13 +20,15 @@ class CollectiveExternallinkfilterLayer(PloneSandboxLayer):
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
         import plone.app.dexterity
+
         self.loadZCML(package=plone.app.dexterity)
-        import plone.restapi
-        self.loadZCML(package=plone.restapi)
         self.loadZCML(package=collective.externallinkfilter)
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, 'collective.externallinkfilter:default')
+        portal.acl_users.userFolderAddUser(
+            SITE_OWNER_NAME, SITE_OWNER_PASSWORD, ["Manager"], []
+        )
+        login(portal, SITE_OWNER_NAME)
 
 
 COLLECTIVE_EXTERNALLINKFILTER_FIXTURE = CollectiveExternallinkfilterLayer()
@@ -35,21 +36,11 @@ COLLECTIVE_EXTERNALLINKFILTER_FIXTURE = CollectiveExternallinkfilterLayer()
 
 COLLECTIVE_EXTERNALLINKFILTER_INTEGRATION_TESTING = IntegrationTesting(
     bases=(COLLECTIVE_EXTERNALLINKFILTER_FIXTURE,),
-    name='CollectiveExternallinkfilterLayer:IntegrationTesting',
+    name="CollectiveExternallinkfilterLayer:IntegrationTesting",
 )
 
 
 COLLECTIVE_EXTERNALLINKFILTER_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(COLLECTIVE_EXTERNALLINKFILTER_FIXTURE,),
-    name='CollectiveExternallinkfilterLayer:FunctionalTesting',
-)
-
-
-COLLECTIVE_EXTERNALLINKFILTER_ACCEPTANCE_TESTING = FunctionalTesting(
-    bases=(
-        COLLECTIVE_EXTERNALLINKFILTER_FIXTURE,
-        REMOTE_LIBRARY_BUNDLE_FIXTURE,
-        z2.ZSERVER_FIXTURE,
-    ),
-    name='CollectiveExternallinkfilterLayer:AcceptanceTesting',
+    name="CollectiveExternallinkfilterLayer:FunctionalTesting",
 )
