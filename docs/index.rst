@@ -1,0 +1,5 @@
+=============================
+collective.externallinkfilter
+=============================
+
+User documentation
