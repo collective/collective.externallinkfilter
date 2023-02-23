@@ -16,7 +16,7 @@ long_description = "\n\n".join(
 
 setup(
     name="collective.externallinkfilter",
-    version="1.0a1",
+    version="1.0",
     description=(
         "An override for resolve_uid_and_caption filter for external links"
     ),
