@@ -84,9 +84,9 @@ class ResolveUIDAndCaptionFilter(Base):
             image, fullimage, src, description = self.resolve_image(src)
             attributes["src"] = src
             if image and hasattr(image, "width"):
-                if "width" not in attributes:
+                if "width" not in attributes or attributes["width"] == '':
                     attributes["width"] = image.width
-                if "height" not in attributes:
+                if "height" not in attributes or attributes["height"] == '':
                     attributes["height"] = image.height
             if fullimage is not None:
                 # Check to see if the alt / title tags need setting
