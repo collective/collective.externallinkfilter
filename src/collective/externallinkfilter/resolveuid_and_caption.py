@@ -83,6 +83,7 @@ class ResolveUIDAndCaptionFilter(Base):
             src = attributes.get("src", "")
             image, fullimage, src, description = self.resolve_image(src)
             attributes["src"] = src
+            attributes["loading"] = "lazy"
             if image and hasattr(image, "width"):
                 if "width" not in attributes or attributes["width"] == '':
                     attributes["width"] = image.width
